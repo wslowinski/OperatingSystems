@@ -1,0 +1,78 @@
+========================================================================
+Autor: Vladyslav Slovinskyi,                          Krakow, 19.04.2021
+========================================================================
+
+* Zawartosc:
+============
+
+Katalog Signals zawiera programy w jezyku C, ktore obsługuja sygnaly.
+
+--------------------------------------------------------------------
+
+I.  Program obslugujacy sygnaly na 3 sposoby: (1) wykonania operacji 
+       domyslnej, (2) ignorowania oraz (3) przechwycenia i wlasnej obslugi
+       sygnalu danego procesu:
+       1) 3a.c                         - program glowny,
+       2) cap.c, cap.h                 - funkcja ktora wypisuje informacje 
+	                                  na temat autora i daty wykonania cw
+       3) identifiers.c, identifiers.h - funkcja wypisująca identyfikatory
+       4) my_signal_hundler.c, .h      - funkcja do obslugi sygnalow
+       5) message.c, message.h         - funkcja wypisujaca komunikaty 
+
+II. Program, ktory uruchamia powyzszy program (3a) poprzez funkcje execl()
+       w procesie potomnym iinego procesu:
+       1) 3b.c                         - program glowny,
+       2) message.c, message.h         - funkcja wypisujaca komunikaty 
+       3) my_signal_hundler.c, .h      - funkcja do obslugi sygnalow
+	
+III.Program umozliwiajacy tworzenie w procesie macierzystym procesu potomnego, 
+       tak aby stal sie liderem nowej grupy procesow, a nastepnie uruchamia 
+       w nim 3 procesy potomne wykonujace program do obslugi sygnalow (3a):
+       1) 1c.c                         - program glowny,
+       2) message.c, message.h         - funkcja wypisujaca komunikaty 
+       3) my_signal_hundler.c, .h      - funkcja do obslugi sygnalow
+	
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic program 3a, nalezy wykonac komende:
+       make 1a
+       ./3a.x [opcja] [nr sygnalu]
+       
+       Sa 3 opcje:
+         def -- operacja domyslna (default)
+         ign -- ignorowanie
+          sh -- przechwycenie (signal handling)
+       
+       Po uruchomieniu programu bez parametrow wywolania (./3a.x) dostaniemy
+       komunikat z instrukcja dalszego dzialania.
+       Przykladowe uzycie programu z opcja przechwycenia sygnalu SIGINT:
+       ./3a.x sh 2
+       
+-> Aby uruchomic program 3b, należy wpisac nastepujace polecenia:
+       make 3b
+       ./3b.x [opcja] [nr sygnalu]
+       
+-> Aby uruchomic program 3c, należy wpisac nastepujace polecenia:
+       make 3c
+       ./3c.x [opcja] [nr sygnalu]
+
+-> Podsumowujac wszystkie 3 programy uruchamiamy podobie (podajac 2 parametry
+   wywolania)
+   
+-> UWAGA: ABY MOC URUCHOMIC PROGRAmy 3b i 3c NAJPIERW NALEZY URUCHOMIC 
+          PROGRAM 3a!
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+
+========================================================================
