@@ -1,0 +1,53 @@
+========================================================================
+Autor: Vladyslav Slovinskyi,                          Krakow, 24.04.2021
+========================================================================
+
+* Zawartosc:
+============
+
+-------------------------------------------------------------------------
+
+I.  Implementacja problemu "Producenta i konsumenta" przy pomocy potokow
+       nienazwanych systemu UNIX:
+       1) main.c                   - program glowny,
+       2) cap.c, cap.h             - funkcja ktora wypisuje informacje na 
+                                     temat autora i daty wykonania cw
+       3) error.c, error.h         - funkcja wypisujaca komunikaty 
+       4) random.c, random.h       - funkcja losujaca liczby naturalne 
+                                     z zadanego przedzialu
+       5) producer.c, .h           - producent pobiera dane z zadanego 
+                                     pliku i wstawia je do potoku
+       6) consumer.c, .h           - konsument pobiera dane z potoku i 
+                                     umieszcza je w zadanym pliku 
+                                     wyjsciowym    
+	
+-------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic program, nalezy wykonac komende:
+       make pipe
+       ./main.x [nazwa pliku inputowego] [nazwa pliku outputowego]
+       
+       Po uruchomieniu programu bez parametrow wywolania (./main.x) 
+       dostaniemy komunikat z instrukcja dalszego dzialania.
+       Przykladowe uzycie programu:
+       ./main.x input.txt output.txt
+
+-> Aby uruchomic opcje porownania plikow, nalezy wykonac komende:
+       make compare in=[nazwa pliku inputowego] out=[nazwa pliku outputowego]
+       Przyklad:
+       make compare in=input.txt out=output.txt
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+       
+========================================================================
