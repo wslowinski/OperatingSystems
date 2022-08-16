@@ -1,0 +1,79 @@
+========================================================================
+Autor: Vladyslav Slovinskyi,                          Krakow, 09.05.2021
+========================================================================
+
+* Zawartosc:
+============
+-------------------------------------------------------------------------
+
+I.  Implementacja problemu "Producenta i konsumenta" przy pomocy potokow
+       nazwanych (FIFO) systemu UNIX:
+       1) main.c                   - program glowny, ktory uruchamia programy
+                                     producenta i konsumenta za pomoca 
+                                     funkcji execl;
+       2) cap.c, cap.h             - funkcja ktora wypisuje informacje na 
+                                     temat autora i daty wykonania cw;
+       3) error.c, error.h         - funkcja wypisujaca komunikaty;
+       4) random.c, random.h       - funkcja losujaca liczby naturalne 
+                                     z zadanego przedzialu;
+       5) producer.c, .h           - producent pobiera dane z zadanego 
+                                     pliku i wstawia je do potoku nazwanego;
+       6) consumer.c, .h           - konsument pobiera dane z potoku i 
+                                     umieszcza je w zadanym pliku 
+                                     wyjsciowym;    
+	
+-------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic program 5a, nalezy wykonac nastepujace komendy:
+       make producer
+       make consumer
+       make main
+       ./main.x [nazwa pliku inputowego] [nazwa pliku outputowego] 
+       [nazwa potoku]
+       
+       Po uruchomieniu programu bez parametrow wywolania (./main.x) 
+       dostaniemy komunikat z instrukcja dalszego dzialania.
+       Przykladowe uzycie programu:
+       ./main.x input.txt output.txt FIFO
+
+-> Aby uruchomic opcje porownania plikow, nalezy wykonac komende:
+       make compare in=[nazwa pliku inputowego] out=[nazwa pliku outputowego]
+       Przyklad:
+       make compare in=input.txt out=output.txt
+       
+-> Aby uruchomic program realizujacy zadanie 5b, nalezy wykonac nastepujacy 
+       ciag komend:
+       
+       make MakeFIFO fifo=[nazwa potoku]
+       Przyklad:
+       make MakeFIFO fifo=FIFO
+       
+       make PRODUCER prog=[nazwa producenta] in=[nazwa pliku inputowego] 
+       fifo=[nazwa potoku]
+       Przyklad:
+       make PRODUCER prog=./producer.x in=input.txt fifo=FIFO
+       
+       make CONSUMER prog=[nazwa producenta] out=[nazwa pliku outputowego]
+       fifo=[nazwa potoku]
+       Przyklad:
+       make CONSUMER prog=./consumer.x out=output.txt fifo=FIFO
+       
+-> Aby usunac potok z poziomu powloki, nalezy wykonac komende:
+       make RemoveFIFO fifo=[nazwa potoku]
+       Przyklad:
+       make RemoveFIFO fifo=FIFO
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+       
+========================================================================
