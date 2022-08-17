@@ -1,0 +1,46 @@
+========================================================================
+Autor: Vladyslav Slovinskyi,                          Krakow, 07.06.2021
+========================================================================
+
+* Zawartosc:
+============
+-------------------------------------------------------------------------
+
+I.  Implementacja problemu "Wzajemnego wykluczania dla procesow" przy 
+       pomocy semaforow standardu POSIX:
+       1) main.c                   - program glowny, ktory uruchamia programy
+                                     producenta i konsumenta za pomoca 
+                                     funkcji execl;
+       2) sem_lib.c, .h            - biblioteka wlasnych funkcji do 
+                                     tworzenia, otwierania, uzyskiwania 
+                                     wartości, operowania, zamykania 
+                                     i usuwania semafora
+       3) sharedmemory.c, .h       - biblioteka wlasnych funkcji do 
+                                     tworzenia, otwierania, zamykania 
+                                     i usuwania pamieci dzielonej
+       4) producer.c               - program Producent
+       5) consumer.c               - program Konsument
+-------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic program 7, nalezy dowolna z ponizszych komend:
+       make static
+       *** lub ***
+       make dynamic1
+       *** lub ***
+       make dynamic2
+       
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+       
+========================================================================
