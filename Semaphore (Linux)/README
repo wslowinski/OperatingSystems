@@ -1,0 +1,50 @@
+========================================================================
+Autor: Vladyslav Slovinskyi,                          Krakow, 21.05.2021
+========================================================================
+
+* Zawartosc:
+============
+-------------------------------------------------------------------------
+
+I.  Implementacja problemu "Wzajemnego wykluczania dla procesow" przy 
+       pomocy semaforow standardu POSIX:
+       1) main.c                   - program glowny, ktory uruchamia program
+                                     powielacz za pomoca funkcji execl;
+       2) cap.c, cap.h             - funkcja ktora wypisuje informacje na 
+                                     temat autora i daty wykonania cw;
+       3) error.c, error.h         - funkcja wypisujaca komunikaty;
+       4) random.c, random.h       - funkcja losujaca liczby naturalne 
+                                     z zadanego przedzialu;
+       5) lib.c, .h                - biblioteka wlasnych funkcji do 
+                                     tworzenia, otwierania, uzyskiwania 
+                                     wartości, operowania, zamykania 
+                                     i usuwania semafora
+       6) powielacz.c              - program do powielania procesow 
+                                     realizujacych wzajemne wykluczanie    
+	
+-------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji, linkowania
+i uruchamiania powyzszych programow, a takze czyszczenia katalogu 
+i jego archiwizacji.
+
+-> Aby uruchomic program, nalezy wykonac nastepujace komendy:
+       make powielacz
+       make main
+       ./main.x [nazwa semafora] [ilosc wywolan f-cji fork()]
+       
+       Po uruchomieniu programu bez parametrow wywolania (./main.x) 
+       dostaniemy komunikat z instrukcja dalszego dzialania.
+       Przykladowe uzycie programu:
+       ./main.x SEMAPHORE 5
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+-> W celu archiwizacji oraz kompresji katalogu nalezy wykonac:
+       make tar
+       
+========================================================================
